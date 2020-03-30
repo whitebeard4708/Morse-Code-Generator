@@ -21,11 +21,21 @@ letter_dict = {
   'q': '--.-',  'r': '.-.',     's': '...',   't': '-',
   'u': '..-',   'v': '...-',    'w': '.--',   'x': '-..-',
   'y': '-.--',  'z': '--..',
+  
   '0': '-----', '1': '..---',   '2': '...--', '3': '...--',
   '4': '....-', '5': '.....',   '6': '-....', '7': '--...',
   '8': '---..', '9': '----.',
+  
+  ' ': ' '
 }
 
-def convert_morse(s):
-  lower = s.lower()
-  
+parser = argparse.ArgumentParser()
+parser.add_argument("-s", "--strings", help="String to convert to Morse code")
+args = parser.parse_args()
+
+s = args.strings()
+s = re.sub("[^a-zA-Z0-9]", "", s)
+chars = list(s.lower())
+morse_chars = [letter_dict[char] for char in chars]
+morse_string = "".join(morse_chars)
+print(morse_string)
